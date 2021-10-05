@@ -1,0 +1,16 @@
+{
+    "name": "ehc/codenpunch",
+    "autoload": {
+        "psr-4": {
+            "Ehc\\Codenpunch\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "shine102",
+            "email": "nguyenngotunglam2@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {"heroku/heroku-buildpack-php": "*"}
+}
