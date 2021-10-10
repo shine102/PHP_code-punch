@@ -22,6 +22,11 @@ class SiteController
         return $app->router->renderView('student', $params);
     }
 
+    public function login()
+    {
+        return Application::$app->router->renderView('login');
+    }
+
     public function Teacher(){
         print_r('Show the info');
     }
@@ -31,6 +36,6 @@ class SiteController
     }
 
     public function handleLogin(){
-
+        return Application::$app->router->renderView('login');
     }
 }
