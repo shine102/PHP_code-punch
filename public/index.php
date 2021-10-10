@@ -14,7 +14,7 @@ use app\core\Application;
 
     $app->router->get('/teacher', [SiteController::class, 'Teacher']);
 
-    $app->router->get('/student', 'student');
+    $app->router->get('/student', [SiteController::class, 'student']);
     
     $app->run();
 
