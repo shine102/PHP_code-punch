@@ -37,7 +37,7 @@ class Router{
                 $callback[0] = new $callback[0]();
             }
 
-            return call_user_func($callback, $callback[1]);
+            return call_user_func($callback);
         }
 
         public function renderView($view, $params=[])

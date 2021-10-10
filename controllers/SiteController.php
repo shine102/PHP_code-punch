@@ -1,5 +1,7 @@
 <?php
 
+namespace app\controllers;
+
 use app\core\Application;
 
 class SiteController
@@ -9,7 +11,8 @@ class SiteController
         $params = [
             'name' => "User" 
         ];
-        return Application::$app->router->renderView('home', $params);
+        $app = new Application(dirname(__DIR__));
+        return $app->router->renderView('home', $params);
     }
 
     public function Teacher(){
@@ -18,5 +21,9 @@ class SiteController
 
     public function handleStudent(){
         print_r('Handling submitted data');
+    }
+
+    public function handleLogin(){
+
     }
 }

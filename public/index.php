@@ -8,11 +8,13 @@ use app\core\Application;
 
     $app->router->get('/', [SiteController::class, 'home']);
 
+    $app->router->get('/login', 'login');
+
+    $app->router->post('/login', [SiteController::class, 'handleLogin']);
+
     $app->router->get('/teacher', [SiteController::class, 'Teacher']);
 
     $app->router->get('/student', 'student');
-    
-    $app->router->post('/student', [SiteController::class, 'handleStudent']);
     
     $app->run();
 
