@@ -15,6 +15,13 @@ class SiteController
         return $app->router->renderView('home', $params);
     }
 
+    public function student()
+    {
+        $params = [];
+        $app = new Application(dirname(__DIR__));
+        return $app->router->renderView('student', $params);
+    }
+
     public function Teacher(){
         print_r('Show the info');
     }
