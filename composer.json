@@ -1,16 +1,10 @@
 {
-    "name": "ehc/codenpunch",
+    "name": "kali/php_web",
     "autoload": {
         "psr-4": {
-            "Ehc\\Codenpunch\\": "src/"
+            "app\\":"./"
         }
     },
-    "authors": [
-        {
-            "name": "shine102",
-            "email": "nguyenngotunglam2@gmail.com"
-        }
-    ],
     "require": {},
     "require-dev": {"heroku/heroku-buildpack-php": "*"}
 }
