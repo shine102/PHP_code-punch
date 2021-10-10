@@ -12,7 +12,7 @@ use app\core\Application;
 
     $app->router->post('/login', [SiteController::class, 'handleLogin']);
 
-    $app->router->get('/teacher', [SiteController::class, 'Teacher']);
+    $app->router->get('/teacher', [SiteController::class, 'teacher']);
 
     $app->router->get('/student', [SiteController::class, 'student']);
     

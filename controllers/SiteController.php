@@ -3,39 +3,38 @@
 namespace app\controllers;
 
 use app\core\Application;
+use app\core\Controller;
+use app\core\Request;
 
-class SiteController
+class SiteController extends Controller
 {
     public function home()
     {
         $params = [
             'name' => "User" 
         ];
-        $app = new Application(dirname(__DIR__));
-        return $app->router->renderView('home', $params);
+        return $this->render('home', $params);
     }
 
     public function student()
     {
         $params = [];
-        $app = new Application(dirname(__DIR__));
-        return $app->router->renderView('student', $params);
+        return $this->render('student', $params);
     }
 
     public function login()
     {
-        return Application::$app->router->renderView('login');
+        $params = [];
+        return $this->render('login',$params);
     }
 
-    public function Teacher(){
+    public function teacher(){
         print_r('Show the info');
     }
 
-    public function handleStudent(){
-        print_r('Handling submitted data');
-    }
-
-    public function handleLogin(){
-        return Application::$app->router->renderView('login');
+    public function handleLogin(Request $request){
+        
+        $params = [];
+        return $this->render('login',$params);
     }
 }
