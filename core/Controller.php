@@ -3,7 +3,7 @@
 namespace app\core;
 
 use app\core\Application;
-class Controllers
+class Controller
 {
     public function render($view, $params = []){
         return Application::$app->router->renderView($view, $params);

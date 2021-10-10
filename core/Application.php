@@ -1,8 +1,6 @@
 <?php
 
-    namespace app\core;
-
-use Response;
+namespace app\core;
 include ("Response.php");
 
 class Application{

@@ -1,8 +1,6 @@
 <?php
 
 namespace app\core;
-use Response;
-
 require_once __DIR__.'/../controllers/SiteController.php';
 
 class Router{
