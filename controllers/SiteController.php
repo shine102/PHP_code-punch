@@ -22,19 +22,7 @@ class SiteController extends Controller
         return $this->render('student', $params);
     }
 
-    public function login()
-    {
-        $params = [];
-        return $this->render('login',$params);
-    }
-
     public function teacher(){
         print_r('Show the info');
-    }
-
-    public function handleLogin(Request $request){
-        
-        $params = [];
-        return $this->render('login',$params);
     }
 }

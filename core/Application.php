@@ -1,7 +1,6 @@
 <?php
 
 namespace app\core;
-include ("Response.php");
 
 class Application{
 
@@ -10,6 +9,13 @@ class Application{
         public Request $request;
         public Response $response;
         public static Application $app;
+        public Controller $controller;
+        public function getController(){
+            return $this->controller;
+        }
+        public function setController(Controller $controller){
+            $this->controller = $controller;
+        }
 
         public function __construct($rootpath){
             self::$ROOT_DIR = $rootpath;
