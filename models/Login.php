@@ -2,8 +2,8 @@
 namespace app\models;
 use app\core\Model;
 
-class Login extends Model
+class Login
 {
-    public string $username;
-    public string $password;
+    public string $username = '';
+    public string $password = '';
 }
