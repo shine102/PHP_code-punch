@@ -11,7 +11,7 @@ use app\core\Application;
 
     $app->router->get('/login', [AuthController::class, 'login']);
 
-    $app->router->post('/login', [AuthController::class, 'handleLogin']);
+    $app->router->post('/login', [AuthController::class, 'login']);
 
     $app->router->get('/register', [AuthController::class, 'register']);
 

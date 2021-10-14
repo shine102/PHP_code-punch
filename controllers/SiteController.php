@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use app\core\Application;
 use app\core\Controller;
-use app\core\Request;
 
 class SiteController extends Controller
 {
@@ -23,6 +21,7 @@ class SiteController extends Controller
     }
 
     public function teacher(){
-        print_r('Show the info');
+        $params = [];
+        return $this->render('teacher', $params);
     }
 }
