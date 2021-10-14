@@ -11,7 +11,7 @@ class Application{
         public static Application $app;
         public Controller $controller;
         public Database $db;
-        // public Session $session;
+        public Session $session;
         public function getController(){
             return $this->controller;
         }
@@ -24,7 +24,7 @@ class Application{
             self::$app = $this; 
             $this->request = new Request();
             $this->response = new Response();
-            // $this->session = new Session();
+            $this->session = new Session();
             $this->router = new Router($this->request, $this->response);
 
             $this->db = new Database($config['db']);

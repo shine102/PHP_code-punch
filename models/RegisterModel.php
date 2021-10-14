@@ -54,6 +54,18 @@ class RegisterModel extends DbModel{
     {
         return ['fullname', 'email', 'number', 'username', 'password', 'status'];
     }
+
+    public function labels() :array
+    {
+        return [
+            'fullname' => 'Fullname',
+            'email' => 'Email',
+            'number' => 'Phone Number',
+            'username' => 'Username',
+            'password' => 'Password',
+            'passwordConfirm' => 'Confirm the Password'
+        ];
+    }
 }
 
 

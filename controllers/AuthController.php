@@ -14,13 +14,6 @@ class AuthController extends Controller
         return $this->render('login');
     }
 
-    public function home(){
-        $this->setLayout('home');
-        return $this->render('home', [
-            'name' => 'User'
-        ]);
-    }
-
     public function register(Request $request)
     {
         $student = new RegisterModel();
@@ -30,8 +23,9 @@ class AuthController extends Controller
 
             if ($student->validate() && $student->save())
             {
-                
+                Application::$app->session->setFlash('success', 'Create a student successfully!');
                 Application::$app->response->redirect('/');
+                exit;
             }
             $this->setLayout('auth');
             return $this->render('register', ['model' => $student]);      
