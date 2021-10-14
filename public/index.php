@@ -5,7 +5,14 @@ use app\controllers\SiteController;
 use app\controllers\AuthController; 
 use app\core\Application;
 
-    $app = new Application(dirname(__DIR__));
+    $config = [
+        'db' => [
+                'dsn' => 'mysql:host=localhost;dbname=php_mvc',
+                'user' => 'root'
+            ]
+        ];
+
+    $app = new Application(dirname(__DIR__), $config);
 
     $app->router->get('/', [SiteController::class, 'home']);
 

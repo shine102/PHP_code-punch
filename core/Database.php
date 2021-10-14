@@ -1,0 +1,29 @@
+<?php
+    namespace app\core;
+    class Database
+    {
+        public \PDO $pdo;
+        public function __construct(array $config)
+        {   
+            $dsn = $config['dsn'] ?? '';
+            $user = $config['user'] ?? '';
+            $this->pdo = new \PDO($dsn, $user);
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
+
+
+        public function getData($data, $table)
+        {
+            $statement = $this->pdo->prepare("select $data from $table");
+            $statement->execute();
+            return $statement->fetchAll(\PDO::FETCH_COLUMN);
+        }
+
+        public function preprare($sql)
+        {
+            # code...
+            return $this->pdo->prepare($sql);
+        }
+    }
+
+?>

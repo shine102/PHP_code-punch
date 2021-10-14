@@ -39,7 +39,9 @@
     </div>
   </div>
 </nav>
-<div class="container">{{content}}</div>
+<div class="container">
+{{content}}
+</div>
 
 
 
