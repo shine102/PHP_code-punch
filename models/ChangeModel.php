@@ -25,8 +25,8 @@ class ChangeModel extends DbModel{
                 'attribute' => 'fullname'
             ]],
             'email' => [self::RULE_EMAIL],
-            'number' => [[self::RULE_MIN, 'min' => 10]],
-            'password' => [[self::RULE_MIN, 'min' => 8]],
+            'number' => [[self::RULE_MIN, 'min' => 10], [self::RULE_MAX, 'max' => 10]],
+            'password' => [[self::RULE_MIN, 'min' => 10]],
             'passwordConfirm' => [[self::RULE_MATCH,'match' => 'password']],
             'username' => [],
         ];
@@ -34,7 +34,7 @@ class ChangeModel extends DbModel{
 
     public function attributes(): array
     {
-        return ['fullname', 'email', 'number', 'username', 'password', 'status', 'Admin'];
+        return ['fullname', 'email', 'number', 'username', 'password'];
     }
 
     public function labels() :array
@@ -59,11 +59,15 @@ class ChangeModel extends DbModel{
         return $this->fullname;
     }
 
-    public function studentUpdate()
+    public function studentUpdate($key, $value)
     {
+        $key = 'fullname';
+        $value = $this->fullname;
+        $fullname = $this->fullname;
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        $this->fullname = parent::findOne(['fullname' => $this->fullname]);
-        
+        if (parent::findOne(['fullname' => $this->fullname])){
+            parent::update($key, $value);
+        }
     }
 }
 

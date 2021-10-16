@@ -47,10 +47,10 @@ class SiteController extends Controller
                 Application::$app->response->redirect('/');
                 exit;
             }
-            $this->setLayout('auth');
+            $this->setLayout('main');
             return $this->render('register', ['model' => $student]);      
         }
-        $this->setLayout('auth');
+        $this->setLayout('main');
         return $this->render('register',  ['model' => $student]);
     }
 
@@ -83,7 +83,7 @@ class SiteController extends Controller
     {   
         $profile = new ChatModel();
         if ($request->isPost()){
-            // $profile -> LoadData($request->getBody());
+            $profile -> LoadData($request->getBody());
 
             if ($profile->validate() && $profile->save())
             {
@@ -108,15 +108,15 @@ class SiteController extends Controller
 
             if ($student->validate() && $student->save())
             {
-                Application::$app->session->setFlash('success', 'Create a student successfully!');
+                Application::$app->session->setFlash('success', 'Change student\'s info successfully!');
                 Application::$app->response->redirect('/');
                 exit;
             }
-            $this->setLayout('auth');
-            return $this->render('register', ['model' => $student]);      
+            $this->setLayout('home');
+            return $this->render('changeInfo', ['model' => $student]);      
         }
-        $this->setLayout('auth');
-        return $this->render('register',  ['model' => $student]);
+        $this->setLayout('home');
+        return $this->render('changeInfo',  ['model' => $student]);
     }
 
 

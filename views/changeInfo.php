@@ -1,7 +1,7 @@
 <?php $this->title = 'Rewrite you identity' ?>
 
 <div class="container text-center" style="width: 40%;">
-<h1>Change your info here</h1>
+<h1>Change the info here</h1>
 <p>For things your don't want to change, you still have to fill the form, it is required</p>
 <?php
 use app\core\form\Form;

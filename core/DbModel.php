@@ -24,12 +24,12 @@
             return true;
         }
 
-        public function update(){
+        public function update($key, $value){
             $tableName = $this->tableName();
             $attributes = $this->attributes();
             $params = array_map(fn($attr) => ":$attr", $attributes);
             $statement = self::prepare("UPDATE $tableName SET(".implode(',', $attributes).") 
-                                        VALUES(".implode(',', $params).")");
+                                        VALUES(".implode(',', $params).") WHERE '$key' = '$value'");
             foreach ($attributes as $attribute){
                 $statement->bindValue(":$attribute", $this->{$attribute});
             }
@@ -52,19 +52,6 @@
             }
             $statement->execute();
             return $statement->fetchObject(static::class);
-        }
-
-        public function getAll($where)
-        {
-            $tableName = 'student';
-            $attributes = array_keys($where);
-            $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
-            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
-            foreach ($where as $key => $item){
-                $statement->bindValue(":$key", $item);
-            }
-            $statement->execute();
-            return $statement->fetchObject();
         }
     }
 ?>
