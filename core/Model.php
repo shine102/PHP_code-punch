@@ -75,6 +75,10 @@ abstract class Model{
         $this->errors[$attribute][] = $message;
     }
 
+    public function addErrorLogin(string $attribute, string $message){
+        $this->errors[$attribute][] = $message;
+    }
+
     public function errorMessages(){
         return [
             self::RULE_EMAIL => 'This field must be valid email address',

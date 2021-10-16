@@ -3,31 +3,18 @@ namespace app\models;
 
 use app\core\DbModel;
 
-class RegisterModel extends DbModel{
-
-    const STATUS_INACTIVE = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_DELETED = 2;
-
-    public int $status = self::STATUS_INACTIVE;
+class ChangeModel extends DbModel{
     public string $fullname = '';
     public string $email = '';
     public string $number = '';
     public string $password = '';
     public string $username = '';
     public string $passwordConfirm = '';
-    public int $Admin = 0;
+
 
     public function tableName(): string
     {
         return 'student';
-    }
-
-    public function save()
-    {
-        $this->status = self::STATUS_INACTIVE;
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        return parent::save();
     }
 
     public function rules(): array
@@ -72,6 +59,12 @@ class RegisterModel extends DbModel{
         return $this->fullname;
     }
 
+    public function studentUpdate()
+    {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $this->fullname = parent::findOne(['fullname' => $this->fullname]);
+        
+    }
 }
 
 

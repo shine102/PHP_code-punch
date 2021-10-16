@@ -1,11 +1,12 @@
 <?php 
     require_once __DIR__.'/../vendor/autoload.php';
 
-use app\controllers\SiteController;
-use app\controllers\AuthController; 
+use app\controllers\SiteController; 
 use app\core\Application;
+use app\models\RegisterModel;
 
-    $config = [
+$config = [
+        'userClass' => RegisterModel::class,
         'db' => [
                 'dsn' => 'mysql:host=localhost;dbname=php_mvc',
                 'user' => 'root'
@@ -16,17 +17,36 @@ use app\core\Application;
 
     $app->router->get('/', [SiteController::class, 'home']);
 
-    $app->router->get('/login', [AuthController::class, 'login']);
+    $app->router->get('/login', [SiteController::class, 'login']);
 
-    $app->router->post('/login', [AuthController::class, 'login']);
+    $app->router->post('/login', [SiteController::class, 'login']);
 
-    $app->router->get('/register', [AuthController::class, 'register']);
+    $app->router->get('/logout', [SiteController::class, 'logout']);
 
-    $app->router->post('/register', [AuthController::class, 'register']);
+    $app->router->get('/register', [SiteController::class, 'register']);
 
-    $app->router->get('/teacher', [SiteController::class, 'teacher']);
+    $app->router->post('/register', [SiteController::class, 'register']);
 
-    $app->router->get('/student', [SiteController::class, 'student']);
+    $app->router->get('/userList', [SiteController::class, 'userList']);
+
+    $app->router->get('/homeworkgive', [SiteController::class, 'homeworkgive']);
+
+    $app->router->post('/homeworkgive', [SiteController::class, 'homeworkgive']);
+
+    $app->router->get('/gameplay', [SiteController::class, 'gameplay']);
+    
+    $app->router->post('/gameplay', [SiteController::class, 'gameplay']);
+
+    $app->router->get('/profile', [SiteController::class, 'profile']);
+    
+    $app->router->post('/profile', [SiteController::class, 'profile']);
+
+    $app->router->get('/about', [SiteController::class, 'about']);
+
+    $app->router->get('/changeInfo', [SiteController::class, 'changeInfo']);
+    
+    $app->router->post('/changeInfo', [SiteController::class, 'changeInfo']);
+    
     
     $app->run();
 

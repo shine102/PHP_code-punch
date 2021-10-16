@@ -21,7 +21,6 @@
 
         public function preprare($sql)
         {
-            # code...
             return $this->pdo->prepare($sql);
         }
     }
