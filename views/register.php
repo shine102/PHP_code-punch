@@ -2,7 +2,6 @@
 
 <div class="container text-center" style="width: 40%;">
 <h1>Create a new student</h1>
-<p>(if you are teacher, of course)</p>
 <?php
 use app\core\form\Form;
 $form = Form::begin('', "post") ?>

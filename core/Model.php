@@ -23,7 +23,6 @@ abstract class Model{
 
     public function labels() : array
     {
-        # code...
         return [];
     }
 

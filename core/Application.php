@@ -41,9 +41,12 @@ class Application{
             $this->userClass = $config['userClass'];
 
             $primaryValue = $this->session->get('student');
+            var_dump($primaryValue);
             if ($primaryValue){
                 $primaryKey = $this->userClass::primaryKey();
+                var_dump($this->userClass::findOne([$primaryKey => $primaryValue]));
                 $this->user = $this->userClass::findOne([$primaryKey => $primaryValue]);
+                
             }
             else {
                 $this->user = null;

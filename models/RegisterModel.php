@@ -38,7 +38,7 @@ class RegisterModel extends DbModel{
                 'attribute' => 'fullname'
             ]],
             'email' => [self::RULE_EMAIL],
-            'number' => [[self::RULE_MIN, 'min' => 10]],
+            'number' => [[self::RULE_MIN, 'min' => 10], [self::RULE_MAX, 'max' => 10]],
             'password' => [[self::RULE_MIN, 'min' => 8]],
             'passwordConfirm' => [[self::RULE_MATCH,'match' => 'password']],
             'username' => [],
@@ -64,7 +64,7 @@ class RegisterModel extends DbModel{
 
     public function primaryKey() : string
     {
-        return 'fullname';
+        return 'Id';
     }
 
     public function getDisplayName(): string
