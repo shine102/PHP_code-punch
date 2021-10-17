@@ -1,7 +1,18 @@
-<?php $this->title = 'Only for teacher hehe' ?>
+<?php
+
+use app\core\Application;
+
+$this->title = 'Someone start a new life here...' ?>
 
 <div class="container text-center" style="width: 40%;">
-<h1>Create a new student</h1>
+<h1>Create a new 
+  <?php if(Application::isGuest()){
+    echo 'teacher account';
+  }
+  else {
+    echo 'student account';
+  }?>
+</h1>
 <?php
 use app\core\form\Form;
 $form = Form::begin('', "post") ?>

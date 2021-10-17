@@ -11,13 +11,11 @@ $this->title = 'List User, nothing really useful';
 echo "<table class='table'>";
 echo "<thead>";
 echo "   <tr>
-<th scope='col'>#</th>
 <th scope='col'>Fullname</th>
 <th scope='col'>Email</th>
 <th scope='col'>Phone Number</th>
 <th scope='col'>Username</th>
 <th scope='col'>Teacher</th>
-<th scope='col'>Chat</th>
 </tr>
 </thead>";
 
@@ -34,7 +32,6 @@ try {
      ?>
     <tbody>
     <tr>
-      <th scope='row'><?php echo $result['Id']?></th>
       <td><?php echo $result['fullname']?></td>
       <td><?php echo $result['email']?></td>
       <td><?php echo $result['number']?></td>
@@ -45,7 +42,6 @@ try {
           else{
               echo "No";
           }?></td>
-      <td><a href="/profile">Link</a></td>
     </tr>
   </tbody>
   <?php endforeach; ?>
@@ -58,4 +54,8 @@ echo "</table>";
 <br>
 <?php if(Application::isTeacher()) : ?>
 <a class="btn btn-primary" href="/register" role="button">Add a student</a>
+<a class="btn btn-primary" href="/delete" role="button">Delete a student</a>
+<a class="btn btn-primary" href="/profile" role="button">Send a message</a>
+<?php else:?>
+<a class="btn btn-primary" href="/profile" role="button">Send a message</a>
 <?php endif;?>

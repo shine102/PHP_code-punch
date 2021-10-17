@@ -7,7 +7,7 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\ChangeModel;
 use app\models\RegisterModel;
-use app\models\ChatModel;
+use app\core\exception\UnauthorityException;
 use app\models\Login;
 use app\core\middlewares\AuthMiddleware;
 
@@ -15,7 +15,7 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->registerMiddleware(new AuthMiddleware(['userList','teacher','gameplay','homeworkgive','changeInfo','register']));
+        $this->registerMiddleware(new AuthMiddleware(['userList','gameplay','homeworkgive','changeInfo', 'profile']));
     }
 
     public function login(Request $request){
@@ -43,7 +43,6 @@ class SiteController extends Controller
 
             if ($student->validate() && $student->save())
             {
-                Application::$app->session->setFlash('success', 'Create a student successfully!');
                 Application::$app->response->redirect('/');
                 exit;
             }
@@ -53,6 +52,46 @@ class SiteController extends Controller
         $this->setLayout('main');
         return $this->render('register',  ['model' => $student]);
     }
+
+    public function changeInfo(Request $request){
+        $student = new ChangeModel();
+        if ($request->isPost())
+        {   
+            $student->LoadData($request->getBody());
+            if ($student->validate() && $student->studentUpdate())
+            {
+                Application::$app->response->redirect('/userList');
+                exit;
+            }
+            $this->setLayout('main');
+            return $this->render('changeInfo', ['model' => $student]);      
+        }
+        $this->setLayout('main');
+        return $this->render('changeInfo',  ['model' => $student]);
+    }
+
+    public function delete(Request $request){
+        $student = new ChangeModel();
+        if(!RegisterModel::findOne(['fullname' => Application::$app->fullname])->Admin === 1){
+            throw new UnauthorityException();
+            exit(); 
+         }
+        if ($request->isPost())
+        {   
+            $student->LoadData($request->getBody());
+            if ($student->studentDelete())
+            {
+                Application::$app->session->setFlash('success', 'Delete student successfully!');
+                Application::$app->response->redirect('/userList');
+                exit;
+            }
+            $this->setLayout('main');
+            return $this->render('delete', ['model' => $student]);      
+        }
+        $this->setLayout('main');
+        return $this->render('delete',  ['model' => $student]);
+    }
+
 
     public function logout()    
     {
@@ -81,17 +120,6 @@ class SiteController extends Controller
 
     public function profile(Request $request)
     {   
-        $profile = new ChatModel();
-        if ($request->isPost()){
-            $profile -> LoadData($request->getBody());
-
-            if ($profile->validate() && $profile->save())
-            {
-                Application::$app->session->setFlash('sended', 'Send message successfully!');
-                Application::$app->response->redirect('/profile');
-                exit;
-            }
-        }
         return $this->render('profile');
     }
 
@@ -99,25 +127,4 @@ class SiteController extends Controller
     {
         return $this->render('gameplay');
     }
-
-    public function changeInfo(Request $request){
-        $student = new ChangeModel();
-        if ($request->isPost())
-        {   
-            $student->LoadData($request->getBody());
-
-            if ($student->validate() && $student->save())
-            {
-                Application::$app->session->setFlash('success', 'Change student\'s info successfully!');
-                Application::$app->response->redirect('/');
-                exit;
-            }
-            $this->setLayout('home');
-            return $this->render('changeInfo', ['model' => $student]);      
-        }
-        $this->setLayout('home');
-        return $this->render('changeInfo',  ['model' => $student]);
-    }
-
-
 }

@@ -12,7 +12,7 @@ $config = [
                 'user' => 'root'
             ]
         ];
-
+        
     $app = new Application(dirname(__DIR__), $config);
 
     $app->router->get('/', [SiteController::class, 'home']);
@@ -46,6 +46,10 @@ $config = [
     $app->router->get('/changeInfo', [SiteController::class, 'changeInfo']);
     
     $app->router->post('/changeInfo', [SiteController::class, 'changeInfo']);
+
+    $app->router->get('/delete', [SiteController::class, 'delete']);
+    
+    $app->router->post('/delete', [SiteController::class, 'delete']);
     
     
     $app->run();

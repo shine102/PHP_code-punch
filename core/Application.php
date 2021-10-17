@@ -29,6 +29,7 @@ class Application{
         }
 
         public function __construct($rootpath, array $config){
+
             self::$ROOT_DIR = $rootpath;
             self::$app = $this; 
             $this->request = new Request();
@@ -40,13 +41,10 @@ class Application{
             $this->db = new Database($config['db']);
             $this->userClass = $config['userClass'];
 
-            $primaryValue = $this->session->get('student');
-            var_dump($primaryValue);
+            $primaryValue = $this->session->get('student') ?? $this->session->get('teacher');
             if ($primaryValue){
                 $primaryKey = $this->userClass::primaryKey();
-                var_dump($this->userClass::findOne([$primaryKey => $primaryValue]));
                 $this->user = $this->userClass::findOne([$primaryKey => $primaryValue]);
-                
             }
             else {
                 $this->user = null;
@@ -70,6 +68,12 @@ class Application{
             $this->user = $user;
             $primaryKey = $user->primaryKey();
             $primaryValue = $user->{$primaryKey};
+            if (!self::isTeacher()){
+                $this->session->set('student', $primaryValue);    
+            }
+            else{
+                $this->session->set('teacher', $primaryValue);
+            }
             $this->session->set('student', $primaryValue);
             return true;
         }
@@ -78,6 +82,7 @@ class Application{
         {
             $this->user = null;
             $this->session->remove('student');
+            $this->session->remove('teacher');
         }
 
         public static function isGuest()

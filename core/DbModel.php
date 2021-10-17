@@ -1,6 +1,11 @@
 <?php
     namespace app\core;
-    abstract class DbModel extends Model
+
+
+use app\core\Application;
+
+
+abstract class DbModel extends Model
     {
         abstract public function tableName() : string;
         
@@ -10,16 +15,20 @@
 
         abstract public function getDisplayName() : string;
 
+        abstract public function getUsername() :string;
+
         public function save(){
             $tableName = $this->tableName();
             $attributes = $this->attributes();
             $params = array_map(fn($attr) => ":$attr", $attributes);
+            
             $statement = self::prepare("INSERT INTO $tableName (".implode(',', $attributes).") 
                                         VALUES(".implode(',', $params).")");
             foreach ($attributes as $attribute){
                 $statement->bindValue(":$attribute", $this->{$attribute});
             }
-
+            var_dump($statement);
+            exit();
             $statement->execute();
             return true;
         }
@@ -27,12 +36,32 @@
         public function update($key, $value){
             $tableName = $this->tableName();
             $attributes = $this->attributes();
-            $params = array_map(fn($attr) => ":$attr", $attributes);
-            $statement = self::prepare("UPDATE $tableName SET(".implode(',', $attributes).") 
-                                        VALUES(".implode(',', $params).") WHERE '$key' = '$value'");
+            $params = array_map(fn($attr) => "$attr", $attributes);
+            $statement = "UPDATE $tableName SET ";
+            $i = 0;
             foreach ($attributes as $attribute){
-                $statement->bindValue(":$attribute", $this->{$attribute});
+                $thing = (string)$this->{$attribute};
+                $statement = $statement . $params[$i] ." = '$thing'";
+                $i++;
+                if ($i<count($attributes)){
+                    $statement = $statement . ",";
+                }
+                
             }
+            $statement = $statement . " WHERE $key = '$value'";
+            $statement = self::prepare($statement);
+            foreach ($attributes as $attribute) {
+                $statement->bindParam(":$attribute", $this->{$attribute});
+            }
+            $statement->execute();
+            return true;
+        }
+
+        public function delete($key, $value)
+        {
+            $tableName = 'student';
+            Application::$app->fullname = Application::$app->user->getDisplayName();
+            $statement = self::prepare("DELETE FROM $tableName WHERE $key = '$value' ");
             $statement->execute();
             return true;
         }
@@ -53,5 +82,7 @@
             $statement->execute();
             return $statement->fetchObject(static::class);
         }
+
+      
     }
 ?>

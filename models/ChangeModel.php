@@ -1,9 +1,11 @@
 <?php
 namespace app\models;
 
+use app\core\Application;
 use app\core\DbModel;
 
 class ChangeModel extends DbModel{
+    
     public string $fullname = '';
     public string $email = '';
     public string $number = '';
@@ -11,6 +13,13 @@ class ChangeModel extends DbModel{
     public string $username = '';
     public string $passwordConfirm = '';
 
+    public function __construct()
+    {
+        if (!Application::$app->isTeacher()){
+            $this->fullname = Application::$app->user->getDisplayName();
+            $this->username = Application::$app->user->getUsername();
+        }
+    }
 
     public function tableName(): string
     {
@@ -20,10 +29,7 @@ class ChangeModel extends DbModel{
     public function rules(): array
     {
         return [
-            'fullname' => [[
-                self::RULE_UNIQUE, 'class' => self::class, 
-                'attribute' => 'fullname'
-            ]],
+            'fullname' => [],
             'email' => [self::RULE_EMAIL],
             'number' => [[self::RULE_MIN, 'min' => 10], [self::RULE_MAX, 'max' => 10]],
             'password' => [[self::RULE_MIN, 'min' => 10]],
@@ -34,7 +40,7 @@ class ChangeModel extends DbModel{
 
     public function attributes(): array
     {
-        return ['fullname', 'email', 'number', 'username', 'password'];
+        return ['fullname', 'email','username','number', 'password'];
     }
 
     public function labels() :array
@@ -59,14 +65,29 @@ class ChangeModel extends DbModel{
         return $this->fullname;
     }
 
-    public function studentUpdate($key, $value)
+    public function getUsername(): string
     {
-        $key = 'fullname';
-        $value = $this->fullname;
-        $fullname = $this->fullname;
+        return $this->username;
+    }
+
+
+    public function studentUpdate()
+    {
+        $key = 'username';
+        $value = $this->username;
+        
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        if (parent::findOne(['fullname' => $this->fullname])){
-            parent::update($key, $value);
+        if (parent::findOne(['username' => $this->username])){
+            return parent::update($key, $value);
+        }
+        }
+
+    public function studentDelete(){
+        $key = 'username';
+        $value = $this->username;
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        if (parent::findOne(['username' => $this->username])){
+            return parent::delete($key, $value);
         }
     }
 }

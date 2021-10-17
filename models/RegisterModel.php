@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\core\Application;
 use app\core\DbModel;
 
 class RegisterModel extends DbModel{
@@ -24,7 +25,10 @@ class RegisterModel extends DbModel{
     }
 
     public function save()
-    {
+    {   
+        if (Application::$app->isGuest()){
+            $this->Admin = 1;
+        }
         $this->status = self::STATUS_INACTIVE;
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         return parent::save();
@@ -39,9 +43,12 @@ class RegisterModel extends DbModel{
             ]],
             'email' => [self::RULE_EMAIL],
             'number' => [[self::RULE_MIN, 'min' => 10], [self::RULE_MAX, 'max' => 10]],
-            'password' => [[self::RULE_MIN, 'min' => 8]],
+            'password' => [[self::RULE_MIN, 'min' => 10]],
             'passwordConfirm' => [[self::RULE_MATCH,'match' => 'password']],
-            'username' => [],
+            'username' => [[
+                self::RULE_UNIQUE, 'class' => self::class, 
+                'attribute' => 'username'
+            ]],
         ];
     }
 
@@ -70,6 +77,11 @@ class RegisterModel extends DbModel{
     public function getDisplayName(): string
     {
         return $this->fullname;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 
 }

@@ -6,25 +6,13 @@ use app\core\DbModel;
 class ChatModel extends DbModel{
         
         public string $sender = '';
-        public array $message = '';
+        public string $message = '';
 
         public function tableName(): string
         {
             return 'message';
         }
         
-        public function save()
-        {
-            return parent::save();
-        }
-
-        public function update($key, $value)
-        {
-            $key = ChatModel::primaryKey();
-            $value = $this->sender;
-            return parent::update($key, $value);
-        }
-
         public function rules() :array
         {
             return [];
@@ -43,5 +31,10 @@ class ChatModel extends DbModel{
         public function getDisplayName(): string
         {
             return $this->sender;
+        }
+
+        public function getUsername(): string
+        {
+        return $this->username;
         }
     } 
