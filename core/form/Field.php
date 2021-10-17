@@ -9,6 +9,7 @@ class Field
     public const TYPE_TEXT = 'text';
     public const TYPE_PASSWORD = 'password';
     public const TYPE_NUM = 'number';
+    public const TYPE_FILE = 'file';
     public string $type;
     public Model $model;
     public string $attribute; 
@@ -47,4 +48,10 @@ class Field
         $this->type = self::TYPE_NUM;
         return $this;
     }
+
+    public function fileField()
+    {
+        $this->type = self::TYPE_FILE;
+        return $this;
+    }    
 }

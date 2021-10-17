@@ -21,6 +21,10 @@ $config = [
 
     $app->router->post('/login', [SiteController::class, 'login']);
 
+    $app->router->get('/upload', [SiteController::class, 'upload']);
+
+    $app->router->post('/upload', [SiteController::class, 'upload']);
+
     $app->router->get('/logout', [SiteController::class, 'logout']);
 
     $app->router->get('/register', [SiteController::class, 'register']);

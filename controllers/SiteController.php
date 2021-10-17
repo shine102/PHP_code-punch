@@ -104,6 +104,11 @@ class SiteController extends Controller
         return $this->render('userList');
     }
 
+    public function upload()
+    {
+        return $this->render('upload');
+    }
+
     public function about()
     {
         return $this->render('about');
