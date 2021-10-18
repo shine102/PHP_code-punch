@@ -1,4 +1,4 @@
-## php_web mvc 2021
+## Code and Punch event - EHC Ethical Hacker Club
 
 1. Giáo viên có thể thêm, sửa, xóa các thông tin của sinh viên. Thông tin có các trường cơ bản gồm: tên đăng nhập, mật khẩu, họ tên, email, số điện thoại.
 2. Sinh viên được phép thay đổi các thông tin của mình trừ tên đăng nhập và họ tên.
