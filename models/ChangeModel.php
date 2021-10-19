@@ -4,6 +4,7 @@ namespace app\models;
 use app\core\Application;
 use app\core\DbModel;
 use app\core\exception\UnauthorityException;
+use app\core\exception\NoUserException;
 
 class ChangeModel extends DbModel{
     
@@ -76,6 +77,9 @@ class ChangeModel extends DbModel{
         if (parent::findOne(['username' => $this->username])){
             return parent::update($key, $value);
         }
+        else {
+            throw new NoUserException();
+        }
         }
 
     public function studentDelete(){
@@ -84,15 +88,20 @@ class ChangeModel extends DbModel{
 
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         parent::checkAdmin($key, $value);
-        if (parent::findOne(['username' => $this->username]) && parent::checkAdmin($key, $value)){
-            return parent::delete($key, $value);
+
+        if(!parent::findOne(['username' => $this->username])){
+            throw new NoUserException();
         }
         else {
-            throw new UnauthorityException();
+            if (parent::checkAdmin($key, $value)){
+                return parent::delete($key, $value);
+            }
+            else {
+                throw new UnauthorityException();
+            }
+    
         }
-    }
+        }
 }
-
-
 
 ?>

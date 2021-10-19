@@ -43,7 +43,7 @@ class SiteController extends Controller
 
             if ($student->validate() && $student->save())
             {
-                Application::$app->response->redirect('/');
+                Application::$app->response->redirect('/login');
                 exit;
             }
             $this->setLayout('main');

@@ -38,8 +38,6 @@ $this->title = 'Have fun... or not XD';
     </tbody>
     <?php endforeach; ?>
   </table>
-
-<br>
 <br>
 <div class="container text-center" style="width:60%">
     <?php  if (Application::isTeacher()): ?> 
@@ -62,13 +60,20 @@ $this->title = 'Have fun... or not XD';
         <input class="btn btn-primary" type="submit" value="Submit" name="submit">
     </form>
     <?php endif; ?>
-</div>
+
 
 <?php
 
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 if (Application::$app->request->isPost()){
     if (Application::isTeacher()){
-        $target_dir = dirname(__DIR__) ."/runtime/";
+        $target_dir = dirname(__DIR__) ."/public/runtime/";
         $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
         $uploadOk = 1;
         $txtFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -103,24 +108,33 @@ if (Application::$app->request->isPost()){
             }
         }
 
-    $hint = $_POST['hint'];
+    $hint = test_input($_POST['hint']);
     $name = $_FILES['formFile']['name'];
     $author = Application::$app->user->getDisplayName();
     $stmt = $conn->prepare("INSERT INTO game (name, author, hint) VALUES ('$name','$author', '$hint' ) ");
     $stmt->execute();
-  
     }
   else {
+    $flag = false;
+    $answer = test_input($_POST['answer']);
     foreach ($results as $result) {
-      if ($_POST['answer'] . ".txt" === $result['name']){
-          echo file_get_contents(dirname(__DIR__). "\\runtime\\" . $result['name']);
-      }      
-      else {
-          echo "Wrong, please think carefully";
-      }
+      if ($answer . ".txt" === $result['name']){
+          echo "<p>Congrattttttt</p>";
+          echo file_get_contents(dirname(__DIR__). "\\public\\runtime\\" . $result['name']); 
+          echo "<br>" ;
+          echo '<img src="/img/right.gif" >';
+          $flag = true;
+      } 
     }
+    if ($flag === false){
+      echo "Wrong, please think carefully";
+      echo '<img src="/img/wrong.gif" >';
+    } 
+
   }
 
 }
 $conn = null;
   ?>
+
+</div>
