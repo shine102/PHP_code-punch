@@ -8,8 +8,9 @@ use app\models\RegisterModel;
 $config = [
         'userClass' => RegisterModel::class,
         'db' => [
-                'dsn' => 'mysql:host=localhost;dbname=php_mvc',
-                'user' => 'root'
+                'dsn' => 'mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102',
+                'user' => 'sql6445102',
+                'password' => 't7JZbAcjpP'
             ]
         ];
         

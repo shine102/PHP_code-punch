@@ -7,7 +7,8 @@
         {   
             $dsn = $config['dsn'] ?? '';
             $user = $config['user'] ?? '';
-            $this->pdo = new \PDO($dsn, $user);
+            $pass = $config['password'] ?? '';
+            $this->pdo = new \PDO($dsn, $user, $pass);
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
 

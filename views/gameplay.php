@@ -1,9 +1,11 @@
 <?php
 
 use app\core\Application;
-
+$this->title = 'Have fun... or not XD';
 ?>
-
+<div class="container text-center" style="width:60%">
+<h1>Gamelist</h1>
+</div>
 <?php 
   echo "<table class='table'>";
   echo "<thead>";
@@ -15,7 +17,7 @@ use app\core\Application;
   </thead>";
   
   try {
-    $conn = new PDO("mysql:host=localhost;dbname=php_mvc", 'root');
+    $conn = new PDO("mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102", 'sql6445102', 't7JZbAcjpP');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT Id, name, author, hint FROM game");
     $stmt->execute();
@@ -37,9 +39,9 @@ use app\core\Application;
     <?php endforeach; ?>
   </table>
 
-
+<br>
+<br>
 <div class="container text-center" style="width:60%">
-    <h1>Gamelist</h1>
     <?php  if (Application::isTeacher()): ?> 
     <form action="/gameplay" method="post" enctype="multipart/form-data">
         <label for="formFile" class="form-label">Upload file, trick you student</label>

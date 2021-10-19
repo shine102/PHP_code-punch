@@ -36,7 +36,7 @@ $this->title = 'Chatting... but your message is show for everyone lmao';
 
 $sender = Application::$app->user->getDisplayName();
 try {
-    $conn = new PDO("mysql:host=localhost;dbname=php_mvc", 'root');
+    $conn = new PDO("mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102", 'sql6445102', 't7JZbAcjpP');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT sender, content, receiver FROM message");
     $stmt->execute();
