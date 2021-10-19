@@ -73,8 +73,7 @@ function test_input($data) {
 
 if (Application::$app->request->isPost()){
     if (Application::isTeacher()){
-        $target_dir = dirname(__DIR__). "/public/runtime/";
-        var_dump($target_dir);
+        $target_dir = "/runtime/";
         $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
         $uploadOk = 1;
         $txtFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -109,6 +108,7 @@ if (Application::$app->request->isPost()){
             $author = Application::$app->user->getDisplayName();
             $stmt = $conn->prepare("INSERT INTO game (name, author, hint) VALUES ('$name','$author', '$hint' ) ");
             $stmt->execute();
+            Application::$app->response->redirect("/gameplay");
             } else {
             echo "Sorry, there was an error uploading your file. ";
             }
@@ -120,7 +120,7 @@ if (Application::$app->request->isPost()){
     foreach ($results as $result) {
       if ($answer . ".txt" === $result['name']){
           echo "<p>Congrattttttt</p>";
-          echo file_get_contents(dirname(__DIR__). "/public/runtime/" . $result['name']); 
+          echo file_get_contents("/runtime/" . $result['name']); 
           echo "<br>" ;
           echo '<img src="/img/right.gif" >';
           $flag = true;
