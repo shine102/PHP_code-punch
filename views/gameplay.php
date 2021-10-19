@@ -73,7 +73,7 @@ function test_input($data) {
 
 if (Application::$app->request->isPost()){
     if (Application::isTeacher()){
-        $target_dir = dirname(__DIR__) ."/public/runtime/";
+        $target_dir = dirname(__DIR__). "\\public\\runtime\\";
         $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
         $uploadOk = 1;
         $txtFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -83,7 +83,7 @@ if (Application::$app->request->isPost()){
             echo "Sorry, file already exists. ";
             $uploadOk = 0;
         }
-
+        
         // Check file size
         if ($_FILES["formFile"]["size"] > 500000) {
             echo "Sorry, your file is too large. ";
@@ -103,16 +103,15 @@ if (Application::$app->request->isPost()){
         } else {
             if (move_uploaded_file($_FILES["formFile"]["tmp_name"], $target_file)) {
             echo "The file has been uploaded. ";
+            $hint = test_input($_POST['hint']);
+            $name = $_FILES['formFile']['name'];
+            $author = Application::$app->user->getDisplayName();
+            $stmt = $conn->prepare("INSERT INTO game (name, author, hint) VALUES ('$name','$author', '$hint' ) ");
+            $stmt->execute();
             } else {
             echo "Sorry, there was an error uploading your file. ";
             }
         }
-
-    $hint = test_input($_POST['hint']);
-    $name = $_FILES['formFile']['name'];
-    $author = Application::$app->user->getDisplayName();
-    $stmt = $conn->prepare("INSERT INTO game (name, author, hint) VALUES ('$name','$author', '$hint' ) ");
-    $stmt->execute();
     }
   else {
     $flag = false;
