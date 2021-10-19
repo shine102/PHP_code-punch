@@ -52,7 +52,7 @@ try {
 <?php
 
 if (Application::$app->request->isPost()){
-  $target_dir = __DIR__ ."\\..\\public\\homework\\given\\";
+  $target_dir = __DIR__ ."/../public/homework/given/";
   var_dump($target_dir);
   exit();
   $target_file = $target_dir . basename($_FILES["formFile"]["name"]);

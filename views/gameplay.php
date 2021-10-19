@@ -119,7 +119,7 @@ if (Application::$app->request->isPost()){
     foreach ($results as $result) {
       if ($answer . ".txt" === $result['name']){
           echo "<p>Congrattttttt</p>";
-          echo file_get_contents(dirname(__DIR__). "\\public\\runtime\\" . $result['name']); 
+          echo file_get_contents(dirname(__DIR__). "/public/runtime/" . $result['name']); 
           echo "<br>" ;
           echo '<img src="/img/right.gif" >';
           $flag = true;
