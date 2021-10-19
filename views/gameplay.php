@@ -74,6 +74,7 @@ function test_input($data) {
 if (Application::$app->request->isPost()){
     if (Application::isTeacher()){
         $target_dir = dirname(__DIR__). "/public/runtime/";
+        var_dump($target_dir);
         $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
         $uploadOk = 1;
         $txtFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
