@@ -69,11 +69,6 @@ class RegisterModel extends DbModel{
         ];
     }
 
-    public function primaryKey() : string
-    {
-        return 'Id';
-    }
-
     public function getDisplayName(): string
     {
         return $this->fullname;

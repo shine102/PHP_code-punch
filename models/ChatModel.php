@@ -22,11 +22,6 @@ class ChatModel extends DbModel{
         {
             return ['message'];
         }
-
-        public function primaryKey() : string
-        {
-            return 'sender';
-        }
     
         public function getDisplayName(): string
         {

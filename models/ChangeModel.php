@@ -55,11 +55,6 @@ class ChangeModel extends DbModel{
         ];
     }
 
-    public function primaryKey() : string
-    {
-        return 'fullname';
-    }
-
     public function getDisplayName(): string
     {
         return $this->fullname;
