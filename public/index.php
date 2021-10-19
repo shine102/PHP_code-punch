@@ -13,7 +13,9 @@ $config = [
                 'password' => 't7JZbAcjpP'
             ]
         ];
-        
+    
+    var_dump(dirname(__DIR__));    
+
     $app = new Application(dirname(__DIR__), $config);
 
     $app->router->get('/', [SiteController::class, 'home']);
