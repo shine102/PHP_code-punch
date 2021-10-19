@@ -83,6 +83,18 @@ abstract class DbModel extends Model
             return $statement->fetchObject(static::class);
         }
 
+        public static function checkAdmin($key, $value)
+        {
+            $tableName = 'student';
+            $statement = self::prepare("SELECT admin FROM $tableName WHERE $key = '$value' ");
+            $statement->execute();
+            if($statement->fetchAll()[0][0] == 1){
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
       
     }
 ?>

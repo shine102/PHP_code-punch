@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\core\Application;
 use app\core\DbModel;
+use app\core\exception\UnauthorityException;
 
 class ChangeModel extends DbModel{
     
@@ -80,9 +81,14 @@ class ChangeModel extends DbModel{
     public function studentDelete(){
         $key = 'username';
         $value = $this->username;
+
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        if (parent::findOne(['username' => $this->username])){
+        parent::checkAdmin($key, $value);
+        if (parent::findOne(['username' => $this->username]) && parent::checkAdmin($key, $value)){
             return parent::delete($key, $value);
+        }
+        else {
+            throw new UnauthorityException();
         }
     }
 }
