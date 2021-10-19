@@ -53,8 +53,6 @@ try {
 
 if (Application::$app->request->isPost()){
   $target_dir = __DIR__ ."/../public/homework/given/";
-  var_dump($target_dir);
-  exit();
   $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
   $uploadOk = 1;
   $pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
