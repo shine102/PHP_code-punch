@@ -18,7 +18,7 @@ $config = [
 
     $app->router->get('/', [SiteController::class, 'home']);
 
-    $app->router->get('//..//views//login', [SiteController::class, 'login']);
+    $app->router->get('/login', [SiteController::class, 'login']);
 
     $app->router->post('/login', [SiteController::class, 'login']);
 
