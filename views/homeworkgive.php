@@ -82,23 +82,17 @@ if (Application::$app->request->isPost()){
   } else {
     if (move_uploaded_file($_FILES["formFile"]["tmp_name"], $target_file)) {
       echo "The file has been uploaded. ";
+      $name = $_FILES['formFile']['name'];
+      $author = Application::$app->user->getDisplayName();
+      $stmt = $conn->prepare("INSERT INTO homework (name, author) VALUES ('$name','$author') ");
+      $stmt->execute();
+      $conn = null;
+      Application::$app->response->redirect("/homeworkgive");
     } else {
       echo "Sorry, there was an error uploading your file. ";
     }
   }
-
-  $name = $_FILES['formFile']['name'];
-  $author = Application::$app->user->getDisplayName();
-  $stmt = $conn->prepare("INSERT INTO homework (name, author) VALUES ('$name','$author') ");
-  $stmt->execute();
 }
-
-
-
 ?>
-
 <?php endif;?>
-<?php
-$conn = null;
-?>
 
