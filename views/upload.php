@@ -16,7 +16,7 @@ $this->title = 'Win the deadline' ?>
 
 <?php else:
     echo "<h1>File uploaded list: </h1>";
-    $fileList = glob(__DIR__ ."\\..\\public\\homework\\receive\\*");
+    $fileList = glob(__DIR__ ."/../public/homework/receive/*");
     foreach($fileList as $filename){
         if(is_file($filename)){
             $target = basename("$filename",".pdf").PHP_EOL;
