@@ -26,7 +26,7 @@ $this->title = 'Have fun... or not XD';
       echo "Error: " . $e->getMessage();
     }
     foreach ($results as $result):
-      $filename = __DIR__ . "/runtime/" .$result['name'];
+      $filename =  __DIR__ . "/../public/runtime/" .$result['name'];
       $resultname = $result['name'];
        ?>
       <tbody>
@@ -61,7 +61,6 @@ $this->title = 'Have fun... or not XD';
     </form>
     <?php endif; ?>
 
-
 <?php
 
 function test_input($data) {
@@ -73,7 +72,7 @@ function test_input($data) {
 
 if (Application::$app->request->isPost()){
     if (Application::isTeacher()){
-        $target_dir = __DIR__ . "/runtime/";
+        $target_dir =  __DIR__ . "/../public/runtime/";
         $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
         $uploadOk = 1;
         $txtFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -120,7 +119,7 @@ if (Application::$app->request->isPost()){
     foreach ($results as $result) {
       if ($answer . ".txt" === $result['name']){
           echo "<p>Congrattttttt</p>";
-          echo file_get_contents( __DIR__ . "/runtime/" . $result['name']); 
+          echo file_get_contents(  __DIR__ . "/../public/runtime/" . $result['name']); 
           echo "<br>" ;
           echo '<img src="/img/right.gif" >';
           $flag = true;

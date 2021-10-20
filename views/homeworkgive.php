@@ -26,7 +26,7 @@ try {
     echo "Error: " . $e->getMessage();
   }
   foreach ($results as $result):
-    $filename = "/homework/given/" . $result['name'];
+    $filename = __DIR__ . "/../public/homework/given/" . $result['name'];
      ?>
     <tbody>
     <tr>
@@ -52,7 +52,7 @@ try {
 <?php
 
 if (Application::$app->request->isPost()){
-  $target_dir = __DIR__ . "/homework/given/";
+  $target_dir =  __DIR__ . "/../public/homework/given/";
   $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
   $uploadOk = 1;
   $pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
