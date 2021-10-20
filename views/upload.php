@@ -29,7 +29,7 @@ $this->title = 'Win the deadline' ?>
 <?php
 
 if (Application::$app->request->isPost()){
-  $target_dir = __DIR__ ."\\..\\public\\homework\\receive\\";
+  $target_dir = __DIR__ ."/../public/homework/receive/";
   $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
   $uploadOk = 1;
   $pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
