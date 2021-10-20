@@ -26,7 +26,7 @@ try {
     echo "Error: " . $e->getMessage();
   }
   foreach ($results as $result):
-    $filename = __DIR__ . "/../public/homework/given/" . $result['name'];
+    $filename = __DIR__ . "\\..\\public\\homework\\given\\" . $result['name'];
      ?>
     <tbody>
     <tr>
