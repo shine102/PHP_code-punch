@@ -25,15 +25,17 @@ try {
 } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
   }
+  
   foreach ($results as $result):
-    $filename = __DIR__ . "/../public/homework/given/" . $result['name'];
+    //đường dẫn khi bấm vào nút dowload
+    $filename = $result['name'];
      ?>
     <tbody>
     <tr>
       <td><?php echo $result['Id']?></td>
       <td><?php echo $result['name']?></td>
       <td><?php echo $result['author']?></td>
-      <td><?php echo '<a href="' . $filename . '"> Download </a>' ?> </td>
+      <td><?php echo '<a href="' . "/homework/given/". $filename . '"> Download </a>' ?> </td>
       <td><a href="\upload">Link</a></td>
     </tr>
   </tbody>
@@ -52,12 +54,12 @@ try {
 <?php
 
 if (Application::$app->request->isPost()){
+  
   $target_dir =  __DIR__ . "/../public/homework/given/";
   $target_file = $target_dir . basename($_FILES["formFile"]["name"]);
   $uploadOk = 1;
   $pdfFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-  // Check if file already exists
   if (file_exists($target_file)) {
     echo "Sorry, file already exists. ";
     $uploadOk = 0;
