@@ -12,7 +12,7 @@ $real = $_GET['receiver'] ?? '';
     <br>
     <h2>Send a message to him (her)</h2>
     <br>
-<p>"Nhất ngôn xuất ký, tứ mã nan truy", so we decide not to add edit message feature. Write anything carefully hehe.</p>
+    <p>"Nhất ngôn xuất ký, tứ mã nan truy", so we decide not to add edit message feature. Write anything carefully hehe.</p>
     <br>
     <form action="/profile" method="post" enctype="multipart/form-data">
     <div class="input-group">
@@ -21,7 +21,7 @@ $real = $_GET['receiver'] ?? '';
       <button class="btn btn-outline-primary btn-lg" id="submit" type="submit" name="submit">Send</button>
       </div>
     </form>
-    <?php endif; ?>
+    <?php else : ?>
     <div class="container-sm">
     <br>
     <br>
@@ -72,5 +72,5 @@ catch (PDOException $e){
 $conn = null;
 echo "</table>";
 ?>
-
+<?php endif; ?>
 </div>
