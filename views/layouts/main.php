@@ -12,6 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
   
     <title><?php echo $this->title ?></title>
+    <!-- <style> 
+  body {
+    background-image: url("img/back.gif");
+    color: white;
+  }
+</style> -->
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,7 +46,7 @@
 <?php else: ?>
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/userList">User List</a>
+          <a class="nav-link" href="/userlist">User List</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/homeworkgive">Homework</a>
@@ -50,6 +56,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/changeInfo">Change student info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
         </li>
       </ul>
   <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

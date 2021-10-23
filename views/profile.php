@@ -3,20 +3,23 @@
 
 use app\core\Application;
 
-$this->title = 'Chatting... but your message is show for everyone lmao';
+$this->title = 'Send your love to them...';
+$real = $_GET['receiver'] ?? '';
 ?>
 
-<div class="container">
+<div class="container text-center" style="width:60%">
+  <?php if($real !== ''): ?>
     <br>
     <h2>Send a message to him (her)</h2>
     <br>
     <form action="/profile" method="post" enctype="multipart/form-data">
     <div class="input-group">
-                    <input class="form-control form-control-lg" id="text" type="text" name="receiver" placeholder="Enter receiver's name" autofocus required>
-                    <input class="form-control form-control-lg" id="text" type="text" name="message" placeholder="Write something..." required>
-                    <button class="btn btn-outline-primary btn-lg" id="submit" type="submit" name="submit">Send</button>
-                </div>
+      <input class="form-control form-control-lg" id="text" type="hidden" name="receiver" value="<?php echo $_GET['receiver'] ?? '';?>" required>
+      <input class="form-control form-control-lg" id="text" type="text" name="message" placeholder="Write something..." required autofocus>
+      <button class="btn btn-outline-primary btn-lg" id="submit" type="submit" name="submit">Send</button>
+      </div>
     </form>
+    <?php endif; ?>
     <div class="container-sm">
     <br>
     <br>
@@ -27,18 +30,15 @@ $this->title = 'Chatting... but your message is show for everyone lmao';
     echo "   <tr>
     <th scope='col'>Sender</th>
     <th scope='col'>Message</th>
-    <th scope='col'>Receiver</th>
     </tr>
     </thead>";
     ?>
     <?php
-
-
-$sender = Application::$app->user->getDisplayName();
+$sender = Application::$app->user->getUsername();
 try {
     $conn = new PDO("mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102", 'sql6445102', 't7JZbAcjpP');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT sender, content, receiver FROM message");
+    $stmt = $conn->prepare("SELECT sender, content, receiver FROM message WHERE receiver='$sender'");
     $stmt->execute();
     $results = $stmt->fetchAll();
   } catch(PDOException $e) {
@@ -50,7 +50,6 @@ try {
     <tr>
       <th scope='row'><?php echo $result['sender']?></th>
       <td><?php echo $result['content']?></td>
-      <td><?php echo $result['receiver']?></td>
     </td>
     </tr>
   </tbody>
@@ -62,7 +61,7 @@ try {
     $stmt = $conn->prepare("INSERT INTO message (sender, content , receiver)
                      VALUES ( '$sender', '$_POST[message]', '$_POST[receiver]' ) ");
     $stmt->execute();
-    Application::$app->response->redirect('/profile');
+    Application::$app->response->redirect('/userlist');
 }
 catch (PDOException $e){
     echo "Error: " . $e->getMessage();

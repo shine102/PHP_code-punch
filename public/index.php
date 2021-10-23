@@ -18,6 +18,8 @@ $config = [
 
     $app->router->get('/', [SiteController::class, 'home']);
 
+    $app->router->get('/hwdelete', [SiteController::class, 'hwdelete']);
+
     $app->router->get('/login', [SiteController::class, 'login']);
 
     $app->router->post('/login', [SiteController::class, 'login']);
@@ -32,7 +34,7 @@ $config = [
 
     $app->router->post('/register', [SiteController::class, 'register']);
 
-    $app->router->get('/userList', [SiteController::class, 'userList']);
+    $app->router->get('/userlist', [SiteController::class, 'userList']);
 
     $app->router->get('/homeworkgive', [SiteController::class, 'homeworkgive']);
 

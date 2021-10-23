@@ -47,11 +47,5 @@ class Field
     public function numberField(){
         $this->type = self::TYPE_NUM;
         return $this;
-    }
-
-    public function fileField()
-    {
-        $this->type = self::TYPE_FILE;
-        return $this;
-    }    
+    }   
 }

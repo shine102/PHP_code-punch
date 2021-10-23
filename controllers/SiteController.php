@@ -10,6 +10,7 @@ use app\models\RegisterModel;
 use app\core\exception\UnauthorityException;
 use app\models\Login;
 use app\core\middlewares\AuthMiddleware;
+use app\models\HwModel;
 
 class SiteController extends Controller
 {
@@ -43,7 +44,7 @@ class SiteController extends Controller
 
             if ($student->validate() && $student->save())
             {
-                Application::$app->response->redirect('/login');
+                Application::$app->response->redirect('/');
                 exit;
             }
             $this->setLayout('main');
@@ -92,6 +93,15 @@ class SiteController extends Controller
         return $this->render('delete',  ['model' => $student]);
     }
 
+    public function hwdelete()
+    {
+        $homework = new HwModel();
+        if ($homework->homeworkDelete()){
+            Application::$app->response->redirect('/homeworkgive');
+            exit;
+        }
+    }
+
 
     public function logout()    
     {
@@ -99,9 +109,9 @@ class SiteController extends Controller
         Application::$app->response->redirect('/');
     }
 
-    public function userList()
+    public function userlist()
     {
-        return $this->render('userList');
+        return $this->render('userlist');
     }
 
     public function upload()
@@ -132,4 +142,6 @@ class SiteController extends Controller
     {
         return $this->render('gameplay');
     }
+
+   
 }

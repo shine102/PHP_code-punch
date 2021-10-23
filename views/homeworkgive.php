@@ -12,7 +12,11 @@ echo "   <tr>
 <th scope='col'>Name</th>
 <th scope='col'>Author</th>
 <th scope='col'>Download</th>
-<th scope='col'>Submit</th>
+<th scope='col'>Submit</th>";
+if (Application::isTeacher()) {
+  echo "<th scope='col'>Delete</th>";
+}
+echo "
 </tr>
 </thead>";
 
@@ -37,6 +41,10 @@ try {
       <td><?php echo $result['author']?></td>
       <td><?php echo '<a href="' . "/homework/given/". $filename . '"> Download </a>' ?> </td>
       <td><a href="\upload">Link</a></td>
+      <?php if(Application::isTeacher()) {
+        $name = $result['name'];
+        echo "<td><a href='\hwdelete?name=$name'>Link</td>";
+      } ?>
     </tr>
   </tbody>
   <?php endforeach; ?>

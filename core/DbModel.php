@@ -59,7 +59,7 @@ abstract class DbModel extends Model
 
         public function delete($key, $value)
         {
-            $tableName = 'student';
+            $tableName = $this->tableName();
             Application::$app->fullname = Application::$app->user->getDisplayName();
             $statement = self::prepare("DELETE FROM $tableName WHERE $key = '$value' ");
             $statement->execute();
