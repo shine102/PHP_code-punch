@@ -12,6 +12,8 @@ $real = $_GET['receiver'] ?? '';
     <br>
     <h2>Send a message to him (her)</h2>
     <br>
+<p>"Nhất ngôn xuất ký, tứ mã nan truy", so we decide not to add edit message feature. Write anything carefully hehe.</p>
+    <br>
     <form action="/profile" method="post" enctype="multipart/form-data">
     <div class="input-group">
       <input class="form-control form-control-lg" id="text" type="hidden" name="receiver" value="<?php echo $_GET['receiver'] ?? '';?>" required>
@@ -70,7 +72,5 @@ catch (PDOException $e){
 $conn = null;
 echo "</table>";
 ?>
-<br>
-<br>
-<p>"Nhất ngôn xuất ký, tứ mã nan truy", so we decide not to add edit message feature. Write anything carefully hehe.</p>
+
 </div>
