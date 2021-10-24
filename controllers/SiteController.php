@@ -16,7 +16,7 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->registerMiddleware(new AuthMiddleware(['userList','gameplay','homeworkgive','changeInfo', 'profile']));
+        $this->registerMiddleware(new AuthMiddleware(['userlist','gameplay','homeworkgive','changeInfo', 'profile']));
     }
 
     public function login(Request $request){

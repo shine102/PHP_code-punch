@@ -16,13 +16,24 @@ $this->title = 'Win the deadline' ?>
 
 <?php else:
     echo "<h1>File uploaded list: </h1>";
+    echo "<table class='table'>";
+    echo "<thead>";
+    echo "   <tr>
+    <th scope='col'>Name</th>
+    <th scope='col'>Download</th>
+    </tr>
+    </thead>";
     $fileList = glob(__DIR__ ."/../public/homework/receive/*");
     foreach($fileList as $filename){
-        if(is_file($filename)){
-            $target = basename("$filename",".pdf").PHP_EOL;
-            echo $target . '<a href="' . "/homework/receive/". "$target". ".pdf" . '"> Download file here </a>' , '<br>';
+      if(is_file($filename)){
+        $target = basename("$filename",".pdf").PHP_EOL;
+        echo "<tbody><tr>
+        <td>$target</td>"; ?>
+        <td><a href="/homework/receive/<?php echo $target ?>.pdf"> Download here </a></td>
+      <?php echo " </tr></tbody> "; 
+      }
     }
-}
+ 
 ?>
 <?php endif; ?>
 

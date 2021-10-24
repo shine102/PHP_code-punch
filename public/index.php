@@ -34,7 +34,7 @@ $config = [
 
     $app->router->post('/register', [SiteController::class, 'register']);
 
-    $app->router->get('/userlist', [SiteController::class, 'userList']);
+    $app->router->get('/userlist', [SiteController::class, 'userlist']);
 
     $app->router->get('/homeworkgive', [SiteController::class, 'homeworkgive']);
 

@@ -3,7 +3,7 @@
 
 
 use app\core\Application;
-
+use app\core\exception\UnauthorityException;
 
 abstract class DbModel extends Model
     {
@@ -36,7 +36,16 @@ abstract class DbModel extends Model
         public function update($key, $value){
             $tableName = $this->tableName();
             $attributes = $this->attributes();
+           
             $params = array_map(fn($attr) => "$attr", $attributes);
+            if (!Application::isTeacher()){
+                if (array_search('fullname', $params) !== false || array_search('username', $params) !== false){
+                    throw new UnauthorityException();
+                }
+            }
+            if (array_search('admin', $params) !== false) {
+                throw new UnauthorityException();
+            }
             $statement = "UPDATE $tableName SET ";
             $i = 0;
             foreach ($attributes as $attribute){
@@ -46,7 +55,6 @@ abstract class DbModel extends Model
                 if ($i<count($attributes)){
                     $statement = $statement . ",";
                 }
-                
             }
             $statement = $statement . " WHERE $key = '$value'";
             $statement = self::prepare($statement);

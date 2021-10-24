@@ -1,4 +1,4 @@
-<?php $this->title = 'HomePage' ?>
+<?php $this->title = 'h0m3p493' ?>
 
 <div class="container text-center" style="width: 50%;">
     <h1></h1>
