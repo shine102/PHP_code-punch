@@ -83,7 +83,7 @@ class SiteController extends Controller
             if ($student->studentDelete())
             {
                 Application::$app->session->setFlash('success', 'Delete student successfully!');
-                Application::$app->response->redirect('/userList');
+                Application::$app->response->redirect('/userlist');
                 exit;
             }
             $this->setLayout('main');
