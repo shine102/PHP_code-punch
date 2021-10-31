@@ -1,16 +1,16 @@
 <?php
 
 use app\core\Application;
+
 $this->title = 'Have fun... or not XD';
 ?>
 <div class="container text-center" style="width:60%">
 <h1>Gamelist</h1>
 </div>
 <?php 
-  echo "<table class='table'>";
+  echo "<table class='table table-striped table-hover'>";
   echo "<thead>";
   echo "   <tr>
-  <th scope='col'>No.</th>
   <th scope='col'>Author</th>
   <th scope='col'>Hint</th>
   </tr>
@@ -25,18 +25,18 @@ $this->title = 'Have fun... or not XD';
   } catch(PDOException $e) {
       echo "Error: " . $e->getMessage();
     }
+    echo "<tbody>";
     foreach ($results as $result):
       $filename =  __DIR__ . "/../public/runtime/" .$result['name'];
       $resultname = $result['name'];
        ?>
-      <tbody>
+      
       <tr>
-        <td><?php echo $result['Id']?></td>
         <td><?php echo $result['author']?></td>
         <td><?php echo $result['hint']?> </td>
       </tr>
-    </tbody>
     <?php endforeach; ?>
+    </tbody>
   </table>
 <br>
 <div class="container text-center" style="width:60%">
@@ -57,7 +57,7 @@ $this->title = 'Have fun... or not XD';
         <p>Submit your answer</p>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required autofocus name="answer" id="answer">
         <br>
-        <input class="btn btn-primary" type="submit" value="Submit" name="submit">
+        <input class="btn btn-outline-dark" type="submit" value="Submit" name="submit">
     </form>
     <?php endif; ?>
 
@@ -119,16 +119,27 @@ if (Application::$app->request->isPost()){
     foreach ($results as $result) {
       if ($answer . ".txt" === $result['name']){
           echo "<p>Congrattttttt</p>";
-          echo file_get_contents(  __DIR__ . "/../public/runtime/" . $result['name']); 
+          $fcontent = file_get_contents(  __DIR__ . "/../public/runtime/" . $result['name']);
+          echo filter_var($fcontent, FILTER_SANITIZE_SPECIAL_CHARS); 
           echo "<br>" ;
           echo "<br>" ;
-          echo '<iframe width="560" height="315" src="https://www.youtube.com/embed/3Nz2Tf9Drp8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          if(stristr($fcontent, '<script>')){
+            echo "It seem that you are trying to bypass our website by uploading malicious file, so get the reward";
+            echo '<img src="/img/hehe.gif">';
+          }
+          else if (stristr($fcontent, '<?php')){
+            echo "It seem that you are trying to bypass our website by uploading malicious file, so get the reward";
+            echo '<img src="/img/hehe.gif">';
+          }
+          else{
+            echo '<img src="/img/right.gif">';
+          }
           $flag = true;
       } 
     }
     if ($flag === false){
       echo "Wrong, please think carefully";
-      echo '<iframe width="560" height="315" src="https://www.youtube.com/embed/uMfu7pExrQA?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>" >';
+      echo '<img src="/img/wrong.gif" >';
     } 
 
   }

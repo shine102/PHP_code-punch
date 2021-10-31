@@ -3,7 +3,7 @@
 use app\core\Application;
 
 $this->title = 'Win the deadline' ?>
-
+<div class="container text-center">
 <?php if (! Application::isTeacher()) :?>
 <div class="container-md text-center" style="width:60%">
   <form action="/upload" method="post" enctype="multipart/form-data">
@@ -16,7 +16,7 @@ $this->title = 'Win the deadline' ?>
 
 <?php else:
     echo "<h1>File uploaded list: </h1>";
-    echo "<table class='table'>";
+    echo "<table class='table table-striped table-hover'>";
     echo "<thead>";
     echo "   <tr>
     <th scope='col'>Name</th>
@@ -24,15 +24,17 @@ $this->title = 'Win the deadline' ?>
     </tr>
     </thead>";
     $fileList = glob(__DIR__ ."/../public/homework/receive/*");
+    echo "<tbody> ";
     foreach($fileList as $filename){
       if(is_file($filename)){
         $target = basename("$filename",".pdf").PHP_EOL;
-        echo "<tbody><tr>
-        <td>$target</td>"; ?>
+        echo "<tr>";
+        echo "<td>$target</td>"; ?>
         <td><a href="/homework/receive/<?php echo $target ?>.pdf"> Download here </a></td>
-      <?php echo " </tr></tbody> "; 
+      <?php echo " </tr>"; 
       }
     }
+    echo "</tbody>";
  
 ?>
 <?php endif; ?>
@@ -76,3 +78,4 @@ if (Application::$app->request->isPost()){
   }
 }
   ?>
+</div>

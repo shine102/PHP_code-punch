@@ -3,7 +3,8 @@
 
 
 use app\core\Application;
-use app\core\exception\UnauthorityException;
+use app\core\exception\heckerException;
+
 
 abstract class DbModel extends Model
     {
@@ -40,11 +41,11 @@ abstract class DbModel extends Model
             $params = array_map(fn($attr) => "$attr", $attributes);
             if (!Application::isTeacher()){
                 if (array_search('fullname', $params) !== false || array_search('username', $params) !== false){
-                    throw new UnauthorityException();
+                    throw new heckerException();
                 }
             }
             if (array_search('admin', $params) !== false) {
-                throw new UnauthorityException();
+                throw new heckerException();
             }
             $statement = "UPDATE $tableName SET ";
             $i = 0;

@@ -10,7 +10,7 @@ $real = $_GET['receiver'] ?? '';
 <div class="container text-center" style="width:60%">
   <?php if($real !== ''): ?>
     <br>
-    <h2>Send a message to him (her)</h2>
+    <h2>Send a message to <?php echo $_GET['receiver']?></h2>
     <br>
     <p>"Nhất ngôn xuất ký, tứ mã nan truy", so we decide not to add edit message feature. Write anything carefully hehe.</p>
     <br>
@@ -18,16 +18,16 @@ $real = $_GET['receiver'] ?? '';
     <div class="input-group">
       <input class="form-control form-control-lg" id="text" type="hidden" name="receiver" value="<?php echo $_GET['receiver'] ?? '';?>" required>
       <input class="form-control form-control-lg" id="text" type="text" name="message" placeholder="Write something..." required autofocus>
-      <button class="btn btn-outline-primary btn-lg" id="submit" type="submit" name="submit">Send</button>
+      <button class="btn btn-outline-dark btn-lg" id="submit" type="submit" name="submit">Send</button>
       </div>
     </form>
     <?php else : ?>
     <div class="container-sm">
     <br>
     <br>
-    <h3>Message list </h3>
+    <h1>Message list </h1>
     <?php
-    echo "<table class='table'>";
+    echo "<table class='table table-striped table-hover'>";
     echo "<thead>";
     echo "   <tr>
     <th scope='col'>Sender</th>
@@ -46,16 +46,18 @@ try {
   } catch(PDOException $e) {
       echo "Error: " . $e->getMessage();
     }
+    echo "<tbody>";
     foreach($results as $result):
     ?>
-    <tbody>
+    
     <tr>
       <th scope='row'><?php echo $result['sender']?></th>
       <td><?php echo $result['content']?></td>
     </td>
     </tr>
-  </tbody>
+
   <?php endforeach; ?>
+  </tbody>
 
 <?php
 if (Application::$app->request->isPost()){

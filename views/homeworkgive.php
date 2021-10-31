@@ -3,12 +3,12 @@
 use app\core\Application;
 
 $this->title = 'Wellcome to hell' ?>
+<div class="container text-center">
 <h1>Homework</h1>
 <?php
-echo "<table class='table'>";
+echo "<table class='table table-striped table-hover'>";
 echo "<thead>";
 echo "   <tr>
-<th scope='col'>No.</th>
 <th scope='col'>Name</th>
 <th scope='col'>Author</th>
 <th scope='col'>Download</th>
@@ -36,7 +36,6 @@ try {
      ?>
     <tbody>
     <tr>
-      <td><?php echo $result['Id']?></td>
       <td><?php echo $result['name']?></td>
       <td><?php echo $result['author']?></td>
       <td><?php echo '<a href="' . "/homework/given/". $filename . '"> Download </a>' ?> </td>
@@ -50,12 +49,11 @@ try {
   <?php endforeach; ?>
 </table>
 <?php if(Application::isTeacher()):?>
-<div class="container-md text-center" style="width:60%">
-  <form action="/homeworkgive" method="post" enctype="multipart/form-data">
+  <!-- <form action="/homeworkgive" method="post" enctype="multipart/form-data"> -->
   <label for="formFile" class="form-label">Still not enough? Your student still have time? Choose a homework file to upload</label>
   <input class="form-control" type="file" id="formFile" name="formFile" required>
   <br>
-  <input class="btn btn-primary" type="submit" value="Submit" name="submit">
+  <input class="btn btn-outline-dark" type="submit" value="Submit" name="submit">
 </form>
 
 

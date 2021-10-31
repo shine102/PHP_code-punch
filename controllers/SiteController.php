@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\exception\NoUserException;
 use app\core\Request;
 use app\models\ChangeModel;
 use app\models\RegisterModel;
 use app\core\exception\UnauthorityException;
 use app\models\Login;
 use app\core\middlewares\AuthMiddleware;
+use app\models\ChatModel;
 use app\models\HwModel;
 
 class SiteController extends Controller
@@ -93,6 +95,18 @@ class SiteController extends Controller
         return $this->render('delete',  ['model' => $student]);
     }
 
+    public function profile(Request $request)
+    {   
+        $receiver = $_GET['receiver'] ?? '';
+        if ($receiver !== '') {
+            if(RegisterModel::findOne(['username' => $_GET['receiver']]) === false){
+                throw new NoUserException();
+                exit();
+            }
+        }
+        return $this->render('profile');
+    }
+
     public function hwdelete()
     {
         $homework = new HwModel();
@@ -131,11 +145,6 @@ class SiteController extends Controller
 
     public function homeworkgive(){
         return $this->render('homeworkgive');
-    }
-
-    public function profile(Request $request)
-    {   
-        return $this->render('profile');
     }
 
     public function gameplay()

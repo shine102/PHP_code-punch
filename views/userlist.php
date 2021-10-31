@@ -5,18 +5,18 @@ use app\core\Application;
 
 $this->title = 'List User, nothing really useful';
 ?>
-<div class="container-sm">
+<div class="container text-center">
 <h1>User List </h1>
 <?php
-echo "<table class='table'>";
+echo "<table class='table table-striped table-hover'>";
 echo "<thead>";
 echo "   <tr>
-<th scope='col'>Fullname</th>
-<th scope='col'>Email</th>
-<th scope='col'>Phone Number</th>
-<th scope='col'>Username</th>
-<th scope='col'>Teacher</th>
-<th scope='col'>Send a message</th>
+<th>Fullname</th>
+<th>Email</th>
+<th>Phone Number</th>
+<th>Username</th>
+<th>Teacher</th>
+<th>Send a message</th>
 </tr>
 </thead>";
 
@@ -29,10 +29,11 @@ try {
 } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
   }
+  echo "<tbody>";
   foreach ($results as $result):
      ?>
-    <tbody>
-    <tr>
+    
+    <tr class="align-middle">
       <td><?php echo $result['fullname']?></td>
       <td><?php echo $result['email']?></td>
       <td><?php echo $result['number']?></td>
@@ -44,18 +45,19 @@ try {
               echo "No";
           }?></td>
       <td> 
-        <a class="btn btn-link text-nowrap" href="/profile?receiver=<?php echo $result['username']?>" role="button">Link</a></td>
+        <a class="btn btn-outline-dark btn-sm" href="/profile?receiver=<?php echo $result['username']?>" role="button">Link</a></td>
     </tr>
-  </tbody>
   <?php endforeach; ?>
+  </tbody>
 <?php
 $conn = null;
 echo "</table>";
 ?>
-</div>
+
 <br>
 <br>
 <?php if(Application::isTeacher()) : ?>
-<a class="btn btn-light" href="/register" role="button">Add a student</a>
-<a class="btn btn-light" href="/delete" role="button">Delete a student</a>
+<a class="btn btn-outline-dark" href="/register" role="button">Add a student</a>
+<a class="btn btn-outline-dark" href="/delete" role="button">Delete a student</a>
 <?php endif;?>
+</div>
