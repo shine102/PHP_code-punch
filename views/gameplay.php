@@ -102,8 +102,8 @@ if (Application::$app->request->isPost()){
         } else {
             if (move_uploaded_file($_FILES["formFile"]["tmp_name"], $target_file)) {
             echo "The file has been uploaded. ";
-            $hint = test_input($_POST['hint']);
-            $name = $_FILES['formFile']['name'];
+            $hint = filter_var(test_input($_POST['hint']), FILTER_SANITIZE_SPECIAL_CHARS);
+            $name = filter_var($_FILES['formFile']['name'], FILTER_SANITIZE_SPECIAL_CHARS);
             $author = Application::$app->user->getDisplayName();
             $stmt = $conn->prepare("INSERT INTO game (name, author, hint) VALUES ('$name','$author', '$hint' ) ");
             $stmt->execute();

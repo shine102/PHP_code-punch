@@ -62,6 +62,8 @@ try {
 <?php
 if (Application::$app->request->isPost()){
 try {
+    $_POST['message'] = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $_POST['receiver'] = filter_var($_POST['receiver'], FILTER_SANITIZE_SPECIAL_CHARS);
     $stmt = $conn->prepare("INSERT INTO message (sender, content , receiver)
                      VALUES ( '$sender', '$_POST[message]', '$_POST[receiver]' ) ");
     $stmt->execute();
