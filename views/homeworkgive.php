@@ -21,7 +21,10 @@ echo "
 </thead>";
 
 try {
-  $conn = new PDO("mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102", 'sql6445102', 't7JZbAcjpP');
+  $dsn = $_ENV['dsn'];
+  $user = $_ENV['user'];
+  $password = $_ENV['password'];
+  $conn = new PDO($dsn, $user, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT Id, name, author FROM homework");
   $stmt->execute();

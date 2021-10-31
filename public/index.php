@@ -5,6 +5,10 @@ use app\controllers\SiteController;
 use app\core\Application;
 use app\models\RegisterModel;
 
+$_ENV['dsn'] = 'mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102';
+$_ENV['user'] = 'sql6445102';
+$_ENV['password'] = 't7JZbAcjpP';
+
 $config = [
         'userClass' => RegisterModel::class,
         'db' => [

@@ -38,7 +38,10 @@ $real = $_GET['receiver'] ?? '';
     <?php
 $sender = Application::$app->user->getUsername();
 try {
-    $conn = new PDO("mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102", 'sql6445102', 't7JZbAcjpP');
+    $dsn = $_ENV['dsn'];
+    $user = $_ENV['user'];
+    $password = $_ENV['password'];
+    $conn = new PDO($dsn, $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT sender, content, receiver FROM message WHERE receiver='$sender'");
     $stmt->execute();
