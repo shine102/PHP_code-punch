@@ -29,7 +29,9 @@ class Application{
         }
 
         public function __construct($rootpath, array $config){
-
+            $_ENV['dsn'] = 'mysql:host=sql6.freemysqlhosting.net;dbname=sql6445102';
+            $_ENV['user'] = 'sql6445102';
+            $_ENV['password'] = 't7JZbAcjpP';
             self::$ROOT_DIR = $rootpath;
             self::$app = $this; 
             $this->request = new Request();
