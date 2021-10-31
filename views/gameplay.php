@@ -48,7 +48,7 @@ $this->title = 'Have fun... or not XD';
         <p>Add hint</p>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required autofocus name="hint" id="hint">
         <br>
-        <input class="btn btn-primary" type="submit" value="Submit" name="submit">
+        <input class="btn btn-outline-dark" type="submit" value="Submit" name="submit">
     </form>
 
 

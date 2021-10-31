@@ -13,6 +13,6 @@ $form = Form::begin('', "post") ?>
   <?php echo $form->field($model, 'username');?>
   <?php echo $form->field($model, 'password')->passwordField();?>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-outline-dark">Submit</button>
 <?php Form::end()?>
 </div>

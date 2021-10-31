@@ -38,18 +38,18 @@ try {
     <tr>
       <td><?php echo $result['name']?></td>
       <td><?php echo $result['author']?></td>
-      <td><?php echo '<a href="' . "/homework/given/". $filename . '"> Download </a>' ?> </td>
-      <td><a href="\upload">Link</a></td>
+      <td><?php echo ' <a class="btn btn-outline-dark btn-sm" href="' . "/homework/given/". $filename . '"> Download </a>' ?> </td>
+      <td><a class="btn btn-outline-dark btn-sm" href="\upload">Link</a></td>
       <?php if(Application::isTeacher()) {
         $name = $result['name'];
-        echo "<td><a href='\hwdelete?name=$name'>Link</td>";
+        echo "<td><a class='btn btn-outline-dark btn-sm' href='\hwdelete?name=$name' role = 'button'> Link </a> </td>";
       } ?>
     </tr>
   </tbody>
   <?php endforeach; ?>
 </table>
 <?php if(Application::isTeacher()):?>
-  <!-- <form action="/homeworkgive" method="post" enctype="multipart/form-data"> -->
+  <form action="/homeworkgive" method="post" enctype="multipart/form-data">
   <label for="formFile" class="form-label">Still not enough? Your student still have time? Choose a homework file to upload</label>
   <input class="form-control" type="file" id="formFile" name="formFile" required>
   <br>

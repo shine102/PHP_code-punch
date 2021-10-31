@@ -10,7 +10,7 @@ $this->title = 'Win the deadline' ?>
   <label for="formFile" class="form-label"><h2>Kick deadline out of your life</h2></label>
   <input class="form-control" type="file" id="formFile" name="formFile" required>
   <br>
-  <input class="btn btn-primary" type="submit" value="Submit" name="submit">
+  <input class="btn btn-outline-dark" type="submit" value="Submit" name="submit">
 </form>
 </div>
 
